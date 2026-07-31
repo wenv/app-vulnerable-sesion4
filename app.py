@@ -1,5 +1,6 @@
 from flask import Flask, request
 import sqlite3
+import ast
 
 app = Flask(__name__)
 DB_PASSWORD = "admin123"  # Credencial hardcodeada (SAST)
@@ -17,7 +18,8 @@ def buscar():
 def calcular():
     expresion = request.args.get("expr")
     # Uso inseguro de eval (SAST)
-    return str(eval(expresion))
+    #return str(eval(expresion))
+    resultado = ast.literal_eval(datos_del_usuario)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080)
